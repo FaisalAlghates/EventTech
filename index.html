@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventTech - منصة فعاليات أنيقة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Almarai', 'Amiri', sans-serif;
+        }
+
+        /* Root Variables */
+        :root {
+            --primary-color: #2c1a5e; /* أرجواني ناعم */
+            --secondary-color: #0f1c3a; /* أزرق فضائي هادئ */
+            --accent-color: #f4c430; /* ذهبي دافئ */
+            --dark-color: #0c0f1f; /* أسود كوني عميق */
+            --light-color: #ffffff; /* أبيض نقي */
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Space Background */
+        body {
+            background: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1%, transparent 2%), var(--dark-color);
+            z-index: -1;
+            animation: starryDrift 80s linear infinite;
+        }
+
+        @keyframes starryDrift {
+            0% { background-position: 0 0; }
+            100% { background-position: -1500px -1500px; }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .stars span {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: glimmer linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes glimmer {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--gradient-bg);
+            padding: 1.5rem 5rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 8px 25px var(--shadow-color);
+            transition: padding 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 1rem 5rem;
+            background: rgba(12, 15, 31, 0.95);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            color: var(--light-color);
+        }
+
+        .logo i {
+            margin-left: 10px;
+            color: var(--accent-color);
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .auth-buttons button {
+            padding: 0.7rem 2rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            margin-left: 1.5rem;
+        }
+
+        .login-btn:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+        }
+
+        .signup-btn {
+            background: var(--accent-color);
+            color: var(--dark-color);
+            border: none;
+        }
+
+        .signup-btn:hover {
+            background: #e6b800;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1531058020387-3be344556be6') no-repeat center center / cover;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--light-color);
+            padding: 0 5rem;
+            position: relative;
+        }
+
+        .clock {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-family: 'Courier New', monospace;
+            color: var(--accent-color);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            max-width: 900px;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            animation: fadeInUp 1.2s ease forwards;
+        }
+
+        .search-bar {
+            display: flex;
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        .search-bar input, .search-bar select {
+            padding: 1.2rem 2rem;
+            border: none;
+            font-size: 1.1rem;
+            background: transparent;
+            outline: none;
+        }
+
+        .search-bar button {
+            padding: 1.2rem 2.5rem;
+            background: var(--accent-color);
+            color: var(--dark-color);
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background: #e6b800;
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 6rem 5rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            margin: 0 3rem;
+            position: relative;
+            top: -100px;
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 120px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .category-icon {
+            background: var(--primary-color);
+            padding: 2.5rem;
+            font-size: 3rem;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .category-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .category-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .category-info p {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        /* Events Section */
+        .events {
+            padding: 6rem 5rem;
+            background: rgba(255, 255, 255, 0.95);
+            margin: 0 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        .event-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group select, .filter-group input {
+            padding: 0.8rem 2rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .view-all:hover {
+            color: var(--accent-color);
+        }
+
+        .view-all i {
+            margin-right: 8px;
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .event-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover .event-image img {
+            transform: scale(1.1);
+        }
+
+        .event-date {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-color);
+            color: var(--dark-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .event-info {
+            padding: 2rem;
+        }
+
+        .event-category {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .event-info h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+        }
+
+        .event-location {
+            display: flex;
+            align-items: center;
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-location i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .event-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .event-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .book-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .book-btn:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+        }
+
+        /* Featured Events */
+        .featured-events {
+            padding: 6rem 5rem;
+            background: rgba(255, 255, 255, 0.95);
+            margin: 0 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        .featured-slider {
+            position: relative;
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+
+        .featured-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px var(--shadow-color);
+            display: flex;
+            height: 450px;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-15px);
+        }
+
+        .featured-image {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-card:hover .featured-image img {
+            transform: scale(1.1);
+        }
+
+        .featured-content {
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-category {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .featured-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            color: #888;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .meta-item i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .featured-desc {
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .featured-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-btn {
+            background: var(--accent-color);
+            color: var(--dark-color);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .featured-btn:hover {
+            background: #e6b800;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .slider-btn {
+            background: white;
+            color: var(--dark-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-btn:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: var(--gradient-bg);
+            padding: 5rem;
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            margin: 0 3rem;
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1.2rem 2rem;
+            border: none;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 1.2rem 2.5rem;
+            background: var(--accent-color);
+            color: var(--dark-color);
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: #e6b800;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 5rem 5rem 3rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .featured-card {
+                flex-direction: column;
+                height: auto;
+            }
+            .featured-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+            .hero {
+                padding: 0 3rem;
+            }
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            .hero p {
+                font-size: 1.5rem;
+            }
+            .search-bar, .newsletter-form {
+                flex-direction: column;
+                border-radius: 30px;
+            }
+            .search-bar input, .search-bar select, .search-bar button,
+            .newsletter-form input, .newsletter-form button {
+                width: 100%;
+                border-radius: 30px;
+                margin-bottom: 10px;
+            }
+            .event-filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .categories, .events, .featured-events, .newsletter {
+                margin: 0 2rem;
+                padding: 4rem 3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Stars Animation -->
+    <div class="stars"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                EventTech <i class="fas fa-ticket-alt"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="event.html">الفعاليات</a></li>
+                <li><a href="categories.html">الفئات</a></li>
+                <li><a href="blog.html">المدونة</a></li>
+                <li><a href="contact.html">اتصل بنا</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="login-btn">تسجيل الدخول</button>
+                <button class="signup-btn">إنشاء حساب</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="clock" id="clock"></div>
+        <h1>اكتشف عالم الفعاليات الأنيق</h1>
+        <p>استمتع بتجربة سلسة وجميلة مع أفضل الحفلات والمهرجانات</p>
+        <div class="search-bar">
+            <input type="text" placeholder="ابحث عن فعالية...">
+            <select>
+                <option value="">كل المدن</option>
+                <option value="riyadh">الرياض</option>
+                <option value="jeddah">جدة</option>
+                <option value="dammam">الدمام</option>
+            </select>
+            <button><i class="fas fa-search"></i> بحث</button>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <h2 class="section-title">تصفح الفئات</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-music"></i></div>
+                <div class="category-info">
+                    <h3>حفلات موسيقية</h3>
+                    <p>125 فعالية</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-theater-masks"></i></div>
+                <div class="category-info">
+                    <h3>عروض مسرحية</h3>
+                    <p>68 فعالية</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-paint-brush"></i></div>
+                <div class="category-info">
+                    <h3>معارض فنية</h3>
+                    <p>42 فعالية</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-utensils"></i></div>
+                <div class="category-info">
+                    <h3>فعاليات طهي</h3>
+                    <p>35 فعالية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events">
+        <h2 class="section-title">الفعاليات القادمة</h2>
+        <div class="event-filters">
+            <div class="filter-group">
+                <select>
+                    <option value="">كل الفئات</option>
+                    <option value="music">موسيقى</option>
+                    <option value="art">فنون</option>
+                </select>
+                <select>
+                    <option value="">كل المدن</option>
+                    <option value="riyadh">الرياض</option>
+                    <option value="jeddah">جدة</option>
+                </select>
+                <input type="date">
+            </div>
+            <a href="#" class="view-all"><i class="fas fa-list"></i> عرض الكل</a>
+        </div>
+        <div class="event-grid">
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3" alt="حفلة موسيقية">
+                    <div class="event-date">15 يونيو</div>
+                </div>
+                <div class="event-info">
+                    <span class="event-category">موسيقى</span>
+                    <h3>مهرجان الموسيقى الدولي</h3>
+                    <div class="event-location">
+                        <i class="fas fa-map-marker-alt"></i> الرياض
+                    </div>
+                    <div class="event-footer">
+                        <div class="event-price">150 ر.س</div>
+                        <button class="book-btn">احجز الآن</button>
+                    </div>
+                </div>
+            </div>
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30" alt="حفلة موسيقية">
+                    <div class="event-date">22 يونيو</div>
+                </div>
+                <div class="event-info">
+                    <span class="event-category">موسيقى</span>
+                    <h3>ليالي الطرب</h3>
+                    <div class="event-location">
+                        <i class="fas fa-map-marker-alt"></i> جدة
+                    </div>
+                    <div class="event-footer">
+                        <div class="event-price">200 ر.س</div>
+                        <button class="book-btn">احجز الآن</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Events -->
+    <section class="featured-events">
+        <h2 class="section-title">فعاليات مميزة</h2>
+        <div class="featured-slider">
+            <div class="featured-card">
+                <div class="featured-image">
+                    <img src="https://images.unsplash.com/photo-1464375117522-1311d6a5b81f" alt="مهرجان الطعام">
+                </div>
+                <div class="featured-content">
+                    <span class="featured-category">طعام</span>
+                    <h3>مهرجان المأكولات العالمية</h3>
+                    <div class="featured-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i> 10 يوليو 2025
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i> الرياض
+                        </div>
+                    </div>
+                    <p class="featured-desc">تجربة طعام راقية تجمع النكهات العالمية.</p>
+                    <div class="featured-price">75 ر.س</div>
+                    <button class="featured-btn">احجز تذكرتك</button>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <div class="slider-btn"><i class="fas fa-chevron-right"></i></div>
+                <div class="slider-btn"><i class="fas fa-chevron-left"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>اشترك معنا</h2>
+        <p>احصل على آخر الأخبار والعروض مباشرة في بريدك</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="أدخل بريدك الإلكتروني" required>
+            <button type="submit">اشترك</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>عن EventTech</h3>
+                <p>منصة أنيقة لحجز الفعاليات بسهولة وجمال.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>روابط</h3>
+                <ul class="footer-links">
+                    <li><a href="#">الفعاليات</a></li>
+                    <li><a href="#">الفئات</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>اتصل بنا</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> الرياض</li>
+                    <li><i class="fas fa-envelope"></i> info@eventtech.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 EventTech. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Clock
+            function updateClock() {
+                const now = new Date();
+                document.getElementById('clock').innerText = now.toLocaleTimeString('ar-SA', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+            });
+
+            // Stars animation
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('span');
+                star.style.width = `${Math.random() * 3 + 1}px`;
+                star.style.height = star.style.width;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${Math.random() * 4 + 2}s`;
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                starsContainer.appendChild(star);
+            }
+
+            // Slider
+            const featuredCards = document.querySelectorAll('.featured-card');
+            const prevBtn = document.querySelector('.slider-btn:nth-child(2)');
+            const nextBtn = document.querySelector('.slider-btn:first-child');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                featuredCards.forEach((card, i) => {
+                    card.style.display = i === index ? 'flex' : 'none';
+                });
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + featuredCards.length) % featuredCards.length;
+                showSlide(currentSlide);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % featuredCards.length;
+                showSlide(currentSlide);
+            });
+
+            showSlide(currentSlide);
+
+            // Booking
+            document.querySelectorAll('.book-btn, .featured-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const eventName = this.closest('.event-card, .featured-card').querySelector('h3').textContent;
+                    alert(`جاري حجز "${eventName}"`);
+                });
+            });
+
+            // Search
+            document.querySelector('.search-bar button').addEventListener('click', function() {
+                const input = document.querySelector('.search-bar input').value;
+                const city = document.querySelector('.search-bar select').value || 'كل المدن';
+                alert(`البحث عن "${input}" في "${city}"`);
+            });
+
+            // Newsletter
+            document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input').value;
+                alert(`تم الاشتراك بنجاح: ${email}`);
+                this.querySelector('input').value = '';
+            });
+        });
+    </script>
+</body>
+</html>
